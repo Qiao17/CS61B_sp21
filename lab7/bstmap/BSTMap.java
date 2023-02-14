@@ -3,9 +3,9 @@ package bstmap;
 import java.util.Iterator;
 import java.util.Set;
 
-public class BSTMap<K extends Comparable, V> implements Map61B<K, V> {
-    public BSTNode root;
-    public int size;
+public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
+    private BSTNode root;
+    private int size;
     private class BSTNode {
         public K key;
         public V value;
@@ -36,7 +36,7 @@ public class BSTMap<K extends Comparable, V> implements Map61B<K, V> {
     public boolean containsKey(K key) {
         return containsKey(root, key);
     }
-    public boolean containsKey(BSTNode b, K key) {
+    private boolean containsKey(BSTNode b, K key) {
         if (b == null) {
             return false;
         }
@@ -56,7 +56,7 @@ public class BSTMap<K extends Comparable, V> implements Map61B<K, V> {
         return get(root, key);
     }
 
-    public V get(BSTNode b, K key) {
+    private V get(BSTNode b, K key) {
         if (b == null) {
             return null;
         }
@@ -83,7 +83,7 @@ public class BSTMap<K extends Comparable, V> implements Map61B<K, V> {
         root = put(root, key, value);
     }
 
-    public BSTNode put(BSTNode b, K key, V value) {
+    private BSTNode put(BSTNode b, K key, V value) {
         if (b == null) {
             return new BSTNode(key, value);
         }
@@ -181,7 +181,7 @@ public class BSTMap<K extends Comparable, V> implements Map61B<K, V> {
         return removedV;
     }
 
-    public void removeNoChild(BSTNode parent, String dir) {
+    private void removeNoChild(BSTNode parent, String dir) {
         if (dir.equals("left")) {
             parent.left = null;
         } else if (dir.equals("right")) {
@@ -191,7 +191,7 @@ public class BSTMap<K extends Comparable, V> implements Map61B<K, V> {
         }
     }
 
-    public void removeLeftChild(BSTNode node, BSTNode parent, String dir) {
+    private void removeLeftChild(BSTNode node, BSTNode parent, String dir) {
         if (dir.equals("left")) {
             parent.left = node.left;
         } else if (dir.equals("right")) {
@@ -201,7 +201,7 @@ public class BSTMap<K extends Comparable, V> implements Map61B<K, V> {
         }
     }
 
-    public void removeRightChild(BSTNode node, BSTNode parent, String dir) {
+    private void removeRightChild(BSTNode node, BSTNode parent, String dir) {
         if (dir.equals("left")) {
             parent.left = node.right;
         } else if (dir.equals("right")) {
@@ -228,7 +228,7 @@ public class BSTMap<K extends Comparable, V> implements Map61B<K, V> {
     public void printInOrder() {
         printInOrder(root);
     }
-    public void printInOrder(BSTNode b) {
+    private void printInOrder(BSTNode b) {
         if (b == null) {
             return;
         }
