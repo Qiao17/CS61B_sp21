@@ -149,9 +149,9 @@ public class LinkedListDequeTest {
         LinkedListDeque<String> lld4 = new LinkedListDeque<>();
         lld4.addFirst("a");
         lld4.addLast("b");
-        lld4.addFirst("c");
-        assertTrue("Should be true", lld3.equals(lld4));
+        lld4.addFirst("d");
+        assertFalse("Should be false", lld3.equals(lld4));
 
-        assertFalse("Should be true", lld3.equals(1));
+        assertFalse("Should be false", lld3.equals(1));
     }
 }
