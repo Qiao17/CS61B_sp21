@@ -5,7 +5,6 @@ import org.junit.Test;
 
 /** Tests of optional parts of lab 8. */
 public class TestMyHashMapExtra {
-
     @Test
     public void testRemove() {
         MyHashMap<String, String> q = new MyHashMap<>();

@@ -25,9 +25,14 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
         }
 
         @Override
-        public boolean equals(Object obj){
+        public boolean equals(Object obj) {
             Node o = (Node) obj;
             return (this.key == o.key && this.value == o.value);
+        }
+
+        @Override
+        public int hashCode() {
+            return key.hashCode();
         }
     }
 
@@ -110,7 +115,9 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     public void clear() {
         size = 0;
         for (Collection c: buckets) {
-            if (c == null) {continue;}
+            if (c == null) {
+                continue;
+            }
             c.clear();
         }
     }
@@ -119,7 +126,9 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     public boolean containsKey(K key) {
         int hashCode = key.hashCode();
         int index = Math.floorMod(hashCode, buckets.length);
-        if (buckets[index] == null) {return false;}
+        if (buckets[index] == null) {
+            return false;
+        }
         for (Node n: buckets[index]) {
             if (n.key.equals(key)) {
                 return true;
@@ -132,7 +141,9 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     public V get(K key) {
         int hashCode = key.hashCode();
         int index = Math.floorMod(hashCode, buckets.length);
-        if (buckets[index] == null) {return null;}
+        if (buckets[index] == null) {
+            return null;
+        }
         for (Node n: buckets[index]) {
             if (n.key.equals(key)) {
                 return n.value;
@@ -148,7 +159,7 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
 
     @Override
     public void put(K key, V value) {
-        if ((size + 1) / (double)buckets.length > loadFactor) {
+        if ((size + 1) / (double) buckets.length > loadFactor) {
             resize();
         }
         // get bucket index
@@ -170,14 +181,16 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
         size += 1;
     }
 
-    public void resize() {
+    private void resize() {
         Collection<Node>[] old = buckets;
         int length = buckets.length;
         buckets = createTable(length * 2);
         int hashCode;
         int index;
         for (int i = 0; i < length; i++) {
-            if (old[i] == null) {continue;}
+            if (old[i] == null) {
+                continue;
+            }
             for (Node c: old[i]) {
                 hashCode = c.key.hashCode();
                 index = Math.floorMod(hashCode, length * 2);
@@ -191,7 +204,7 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
 
     @Override
     public Set<K> keySet() {
-        Set<K> keys= new HashSet<>();
+        Set<K> keys = new HashSet<>();
         for (int i = 0; i < buckets.length; i++) {
             if (buckets[i] != null) {
                 for (Node n : buckets[i]) {
@@ -204,11 +217,13 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
 
     @Override
     public V remove(K key) {
-        if (!containsKey(key)) {return null;}
+        if (!containsKey(key)) {
+            return null;
+        }
         int hashCode = key.hashCode();
         int index = Math.floorMod(hashCode, buckets.length);
         V value = get(key);
-        Node nRemove = createNode(key, value);boolean b;
+        Node nRemove = createNode(key, value);
         buckets[index].remove(nRemove);
         size -= 1;
         return value;
@@ -227,7 +242,7 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     private class MyHashMapIterator implements Iterator<K> {
         private Set<K> keys;
         private Iterator<K> iterator;
-        public MyHashMapIterator() {
+        MyHashMapIterator() {
             keys = keySet();
             iterator = keys.iterator();
         }
