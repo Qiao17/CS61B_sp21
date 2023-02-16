@@ -14,6 +14,9 @@ public class TestMyHashMapExtra {
         q.put("a", "a");
         q.put("d", "a");
         q.put("e", "a"); // a b c d e
+        for (String s: q) {
+            System.out.println(s);
+        }
         assertTrue(null != q.remove("c"));
         assertFalse(q.containsKey("c"));
         assertTrue(q.containsKey("a"));
