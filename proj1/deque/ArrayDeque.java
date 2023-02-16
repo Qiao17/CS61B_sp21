@@ -2,7 +2,7 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
+public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
     private T[] items;
     private int size;
     private int nextFirst;
@@ -72,7 +72,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
             return null;
         }
         int length =  items.length;
-        if (length >= 16 && (size - 1) / (double)length < 0.25) {
+        if (length >= 16 && (size - 1) / (double) length < 0.25) {
             resize(length / 2);
         }
 
@@ -93,7 +93,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
             return null;
         }
         int length =  items.length;
-        if (length >= 16 && (size - 1) / (double)length < 0.25) {
+        if (length >= 16 && (size - 1) / (double) length < 0.25) {
             resize(length / 2);
         }
 
@@ -125,7 +125,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
 
     private class ADIterator implements Iterator<T> {
         private int wizPoz;
-        public ADIterator() {
+        ADIterator() {
             wizPoz = (nextFirst + 1) % items.length;
         }
 
@@ -154,13 +154,13 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
             return true;
         }
         if (o instanceof Deque) {
-            Deque oAD = (Deque)o;
+            Deque oAD = (Deque) o;
             if (size != oAD.size()) {
                 return false;
             }
             int i = 0;
             for (T x: this) {
-                if (!x.equals(oAD.get(i))){
+                if (!x.equals(oAD.get(i))) {
                     return false;
                 }
                 i++;

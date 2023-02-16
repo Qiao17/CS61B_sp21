@@ -2,20 +2,20 @@ package deque;
 
 import java.util.Iterator;
 
-public class LinkedListDeque<T> implements Iterable<T>, Deque<T>{
+public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
     private class Node {
         private T item;
         private Node next;
         private Node pre;
-        public Node(T i, Node p, Node n) {
+        Node(T i, Node p, Node n) {
             item = i;
             next = n;
-            pre =p;
+            pre = p;
         }
     }
 
-    Node sentinel;
-    int size;
+    private Node sentinel;
+    private int size;
 
     public LinkedListDeque() {
         sentinel = new Node(null, null, null);
@@ -89,7 +89,7 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T>{
             return null;
         }
         Node p = sentinel;
-        for(int i = 0; i <= index; i++) {
+        for (int i = 0; i <= index; i++) {
             p = p.next;
         }
         return p.item;
@@ -113,7 +113,7 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T>{
 
     private class LLDIterator implements Iterator<T> {
         private Node wizPoz;
-        public LLDIterator() {
+        LLDIterator() {
             wizPoz = sentinel.next;
         }
 
@@ -141,8 +141,8 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T>{
         if (this == o) {
             return true;
         }
-        if (o instanceof Deque ) {
-            Deque oLLD = (Deque)o;
+        if (o instanceof Deque) {
+            Deque oLLD = (Deque) o;
             if (size != oLLD.size()) {
                 return false;
             }
